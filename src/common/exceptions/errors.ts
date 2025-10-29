@@ -15,7 +15,7 @@ export class BadRequestError extends ApiError {
  * 401 Unauthorized: Authentication is required and has either failed or not yet been provided.
  */
 export class UnauthorizedError extends ApiError {
-    constructor(message: string, errorCode: ErrorCode = ErrorCode.UNAUTHORIZED) {
+    constructor(message: string = "Unauthorized", errorCode: ErrorCode = ErrorCode.UNAUTHORIZED) {
         super(message, errorCode, 401);
     }
 }

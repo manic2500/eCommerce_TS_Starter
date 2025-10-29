@@ -5,8 +5,56 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["relationJoins"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  permissions Permission[]
+  users       User[]
+}
+
+model Permission {
+  id    String @id @default(cuid())
+  name  String @unique
+  roles Role[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique(map: "user_email_idx")
+  password  String
+  roles     Role[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique(map: "product_slug_idx")
+  category    String
+  images      String[]
+  brand       String
+  description String
+  stock       Int
+  price       Decimal  @default(0) @db.Decimal(12, 2)
+  rating      Decimal  @default(0) @db.Decimal(3, 2)
+  numReviews  Int      @default(0)
+  isFeatured  Boolean  @default(false)
+  banner      String?
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
 }
 
 /**
@@ -16,18 +64,11 @@ generator client {
  * }
  */
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+/**
+ * enum Role {
+ * ADMIN
+ * USER
+ * }
+ */
 
-model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique(map: "email_unique_idx")
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("users")
-}
+//id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid

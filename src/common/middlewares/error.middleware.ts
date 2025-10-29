@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiError } from "../exceptions/apiError";
-import { ErrorCode } from "../exceptions/errorCode";
 import { UnprocessableEntityError } from "../exceptions/errors";
+import { ErrorCode } from "../exceptions/errorCode";
 
 export const errorMiddleware = (err: unknown, req: Request, res: Response, next: NextFunction) => {
     // Check if the error is an instance of our custom ApiError class
