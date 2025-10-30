@@ -1,4 +1,4 @@
-export enum AppPermission {
+enum AppPermission {
     // Super Admin
     ALL = 'all',
 
@@ -61,3 +61,5 @@ export enum AppPermission {
     SETTINGS_ALL = 'settings:all',
     SETTINGS_UPDATE = 'settings:update',
 }
+
+export default AppPermission

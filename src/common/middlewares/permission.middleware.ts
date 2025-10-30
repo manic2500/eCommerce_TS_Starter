@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { ForbiddenError } from '../exceptions/errors';
-import { AppPermission } from '../types/permission.enum';
+import { ForbiddenError } from '../types/exceptions/errors';
+import AppPermission from '../types/constants/appPermission';
 
 type PermissionInput = AppPermission | AppPermission[];
 

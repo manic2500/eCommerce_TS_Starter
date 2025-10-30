@@ -3,7 +3,7 @@ import { Router } from 'express';
 //import { requirePermission } from '../../common/middlewares/permission.middleware';
 import { authMiddleware } from '../../common/middlewares/auth.middleware';
 import { requirePermission } from '../../common/middlewares/permission.middleware';
-import { AppPermission } from '../../common/types/permission.enum';
+import AppPermission from '../../common/types/constants/appPermission';
 import { getAllProducts, getLatestProducts } from './product.controller';
 
 

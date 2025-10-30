@@ -6,6 +6,13 @@ export interface UserDto {
     permissions: string[]; // Flattened array of all permissions
 }
 
+/* export interface UserWithRoles extends UserDto {
+    roles: string[]; // Flattened array of role names
+}
+export interface UserWithRolesPermissions extends UserWithRoles {
+    permissions: string[]; // Flattened array of all permissions
+}
+ */
 /* 
 
 roles?: { // Make the roles optional

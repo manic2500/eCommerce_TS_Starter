@@ -1,5 +1,7 @@
 
-export enum ErrorCode {
+enum StatusCode {
+
+    ERROR = 5000,
     // 4xxx series: Client-Side Errors
     // Group 4000-4099: Authentication & Authorization
     UNAUTHORIZED = 4001,
@@ -19,4 +21,13 @@ export enum ErrorCode {
 
     // 5xxx series: Server-Side Errors
     SERVER_ERROR = 5001,
+
+
+    // Success Codes
+    SUCCESS = 2000,
+    USER_REGISTERED = 2001,
+    USER_LOGGED_IN = 2002,
+
 }
+
+export default StatusCode

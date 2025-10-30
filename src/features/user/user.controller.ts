@@ -1,15 +1,14 @@
-import { Request, Response } from "express";
-import { CreateUserWithRolesInput } from "./user.schema";
-import { userService } from "./user.service";
+import { Request, RequestHandler, Response } from "express";
+import { setAuthCookie } from "../shared/utils";
 
 
+export const logoutHandler: RequestHandler = async (req, res) => {
 
-export const registerUserHandler = async (
-    req: Request<{}, {}, CreateUserWithRolesInput>,
-    res: Response) => {
+    setAuthCookie({ res, name: 'token', value: '', maxAge: 0 });
 
-    const userDto = await userService.createUser(req.body)
+    res.json({ message: 'Logged out successfully' });
+}
 
-    res.status(201).json(userDto);
-
-};
+export const me = async (req: Request, res: Response) => {
+    res.json(req.user)
+}

@@ -1,6 +1,6 @@
 import z, { ZodType } from "zod";
 import { Request, Response, NextFunction } from "express";
-import { UnprocessableEntityError } from "../exceptions/errors";
+import { UnprocessableEntityError } from "../types/exceptions/errors";
 
 
 export const validateData = <T extends ZodType>(schema: T) => {

@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { CreateUserWithRolesSchema } from "./user.schema";
-import { validateData } from "../../common/middlewares/validate.middleware";
-import { registerUserHandler } from "./user.controller";
+import { authMiddleware } from "../../common/middlewares/auth.middleware";
+import { logoutHandler, me } from "./user.controller";
 
 const userRoutes = Router()
 
-
-userRoutes.post('/register', validateData(CreateUserWithRolesSchema), registerUserHandler)
-
+userRoutes.post('/logout', authMiddleware, logoutHandler);
+userRoutes.get('/me', authMiddleware, me)
+//userRoutes.patch('/change-password', auth, changePassword);
 
 export default userRoutes

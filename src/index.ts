@@ -3,8 +3,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import { appConfig } from "./common/config";
-import { NotFoundError } from "./common/exceptions/errors";
-import { ErrorCode } from "./common/exceptions/errorCode";
+import { NotFoundError } from "./common/types/exceptions/errors";
+import StatusCode from "./common/types/constants/statusCode";
 import rootRouter from "./features/shared/routes";
 import { errorMiddleware } from "./common/middlewares/error.middleware";
 import { authMiddleware } from "./common/middlewares/auth.middleware";
@@ -96,7 +96,7 @@ app.use('/api', rootRouter)
 
 // --- Place the 404 handler middleware AFTER all other routes ---
 app.use((req, res, next) => {
-    throw new NotFoundError('Invalid URL', ErrorCode.NOT_FOUND)
+    throw new NotFoundError('Invalid URL', StatusCode.NOT_FOUND)
 });
 
 // Error handling middleware (optional)

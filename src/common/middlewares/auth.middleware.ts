@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { appConfig } from '../config';
-import { ForbiddenError, UnauthorizedError } from '../exceptions/errors';
+import { ForbiddenError, UnauthorizedError } from '../types/exceptions/errors';
 import { JwtPayload } from '../types/express';
-import { userService } from '../../features/user/user.service';
+import userService from '../../features/user/user.service';
+import { getUserDto } from '../../features/shared/mappers/user.mapper';
+
 
 
 // ✅ Ensure JWT secret is defined
@@ -45,12 +47,12 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         }
 
         // ✅ 6. Convert to DTO and attach to req.user
-        const user = userWithRoles.toDto();
+        const userDto = getUserDto(userWithRoles)
 
         req.user = {
-            userId: user.id,
-            roles: user.roles,
-            permissions: user.permissions,
+            userId: userDto.id,
+            roles: userDto.roles,
+            permissions: userDto.permissions,
         };
 
         // ✅ 7. Continue to next middleware
